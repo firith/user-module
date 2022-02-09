@@ -10,24 +10,25 @@
       </p>
 
       <div class="mt-5">
-        <x-button-danger
+        <x-nore::button-danger
           type="button"
+          color="secondary"
           wire:click="$set('showModal', true)"
         >
           Delete user
-        </x-button-danger>
+        </x-nore::button-danger>
       </div>
     </div>
 
-    <x-dialog-modal wire:model="showModal">
+    <x-nore::dialog-modal wire:model="showModal">
       <x-slot name="title"><span x-text="state.name"></span></x-slot>
       <x-slot name="content">
         Do you want to delete this user?
       </x-slot>
       <x-slot name="footer">
-        <x-button-gray color="tertiary" class="hover:bg-gray-200" type="button" wire:click="$set('showModal', false)">Cancel</x-button-gray>
-        <x-button-danger type="button" wire:click="deleteUser">Delete User</x-button-danger>
+        <x-nore::button-gray color="tertiary" class="hover:bg-gray-200" type="button" wire:click="$set('showModal', false)">Cancel</x-nore::button-gray>
+        <x-nore::button-danger type="button" wire:click="deleteUser">Delete User</x-nore::button-danger>
       </x-slot>
-    </x-dialog-modal>
+    </x-nore::dialog-modal>
   </div>
 </div>

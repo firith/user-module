@@ -2,7 +2,6 @@
 
 namespace Modules\User\Http\Livewire\Users;
 
-use App\Models\User;
 use Carbon\Carbon;
 use Filament\Tables\Actions\LinkAction;
 use Filament\Tables\Columns\BooleanColumn;
@@ -13,6 +12,7 @@ use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
 
 class UserTable extends Component implements HasTable
@@ -28,7 +28,7 @@ class UserTable extends Component implements HasTable
 
     protected function getTableQuery(): Builder
     {
-        return User::query()
+        return config('user.model')::query()
             ->with('roles')
             ->latest();
     }
@@ -52,7 +52,7 @@ class UserTable extends Component implements HasTable
     {
         return [
             LinkAction::make('edit')
-                ->url(fn(User $record): string => route('usermodule.admin.users.edit', $record)),
+                ->url(fn(Model $record): string => route('usermodule.admin.users.edit', $record)),
         ];
     }
 
@@ -82,7 +82,7 @@ class UserTable extends Component implements HasTable
     public function render(): View
     {
         return view('user::livewire.users.table')
-            ->layout('layouts.admin')
+            ->layout('nore::layouts.admin')
             ->layoutData(['pageTitle' => 'Users']);
     }
 

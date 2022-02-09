@@ -88,7 +88,8 @@ class CreateForm extends Component implements HasForms
 
     public function submit()
     {
-        $user = new User();
+        $class = config('user.model');
+        $user = new $class();
         $user->forceFill($this->form->getState())
             ->save();
 
@@ -100,13 +101,13 @@ class CreateForm extends Component implements HasForms
 
     public function getFormModel(): string
     {
-        return User::class;
+        return config('user.model');
     }
 
     public function render(): View
     {
         return view('user::livewire.users.form')
-            ->layout('layouts.admin')
+            ->layout('nore::layouts.admin')
             ->layoutData(['pageTitle' => 'Edit User']);
     }
 }

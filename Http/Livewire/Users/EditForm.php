@@ -7,7 +7,6 @@ use Filament\Forms;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Illuminate\Contracts\View\View;
-use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use Spatie\Permission\Models\Role;
@@ -120,18 +119,18 @@ class EditForm extends Component implements HasForms
         unset($this->data['passwordConfirmation']);
     }
 
-    public function deleteUser(): Redirector
+    public function deleteUser()
     {
         $this->user->delete();
 
-        return redirect()->route('usermodule.users.index')
+        return redirect()->route('usermodule.admin.users.index')
             ->with('toast', ['type' => 'success', 'message' => 'User was deleted.']);
     }
 
     public function render(): View
     {
         return view('user::livewire.users.form')
-            ->layout('layouts.admin')
+            ->layout('nore::layouts.admin')
             ->layoutData(['pageTitle' => 'Edit User']);
     }
 }
